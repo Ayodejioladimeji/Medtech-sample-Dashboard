@@ -314,6 +314,7 @@
   .article-right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 
     @media (max-width: 991px) {
       display: none;

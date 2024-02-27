@@ -18,21 +18,28 @@ const BlogDetails = () => {
 
   //   get single blog
   useEffect(() => {
-    if (state?.token && slug2) {
+    if (slug2) {
       (async () => {
-        const res = await GetRequest(`/admin/blog/${slug2}`, state?.token);
+        const res = await GetRequest(`/blog/${slug2}`);
+        console.log(res.data);
         setBlog(res.data);
         setLoading(false);
       })();
     }
-  }, [state?.token, slug2]);
+  }, [slug2]);
 
   //
   return (
     <Layout>
-
       {loading ? (
-        <div style={{height:'50vh', display:'flex', alignItems:'center', justifyContent:'center'}}>
+        <div
+          style={{
+            height: "50vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Loading
             height="35px"
             width="35px"
@@ -48,23 +55,21 @@ const BlogDetails = () => {
                 <div className="col-lg-6 article-left">
                   <div className="d-flex align-items-center gap-3 mb-2">
                     <GoBack />
-                    <p>{moment(blog?.updatedAt).format("ll")}</p>
 
-                    {/* <p>{blog?.time}</p> */}
+                    <p>{moment(blog?.updatedAt).format("lll")}</p>
                   </div>
 
                   <h1>{blog?.title}</h1>
 
-                  {/* <div className="hero-footer gap-4">
-                <small>Samuel BABAJIDE </small>
-                <span>CHIEF INVESTMENT STRATEGIST AND CHIEF ECONOMIST </span>
-              </div> */}
+                  <div className="hero-footer gap-4">
+                    <p>{blog?.category}</p>
+                  </div>
                 </div>
 
                 <div className="col-lg-6 article-right">
                   <div className="article-right-img">
                     <Image
-                      src={blog?.image?.url}
+                      src={blog?.image}
                       alt="hero"
                       width={100}
                       height={100}
@@ -79,9 +84,9 @@ const BlogDetails = () => {
           <div className="summary">
             <div className="container">
               <div className="row">
-                <div className="summary-box">
+                <p className="summary-box">
                   {ReactHtmlParser(atob(blog?.content))}
-                </div>
+                </p>
               </div>
             </div>
           </div>
