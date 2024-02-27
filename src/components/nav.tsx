@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Logo2 from "@/svg/Logo2";
+import Image from "next/image";
 
 export default function Nav() {
   const router = useRouter();
@@ -12,7 +13,12 @@ export default function Nav() {
     <nav className="navbar navbar-expand-lg align-items-center">
       <div className="container-fluid">
         <Link className="navbar-brand" href={"/"}>
-          <Logo2 />
+          <Image
+            src="/images/product-icon.svg"
+            alt=""
+            width={100}
+            height={100}
+          />
         </Link>
 
         <button
