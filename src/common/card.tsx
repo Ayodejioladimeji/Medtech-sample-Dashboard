@@ -1,8 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import moment from "moment";
-import { ShortenContent } from "./shortenContent";
-import ReactHtmlParser from "react-html-parser";
 import { useRouter } from "next/router";
 
 type Props = {
