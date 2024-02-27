@@ -1,0 +1,360 @@
+.create-blog {
+  padding: 130px 150px;
+
+  .loading-box {
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .form-box {
+    margin-bottom: 20px;
+
+    label {
+      @include body-text(14px, 400, $text-color);
+      margin-bottom: 10px !important;
+
+      &.disabled {
+        color: $light-color;
+      }
+    }
+
+    input {
+      @include input($border-color);
+      display: block;
+      width: 100%;
+      border-radius: 8px;
+      padding: 13px;
+      font-size: 14px;
+
+      &:disabled {
+        background: $off-white !important;
+      }
+
+      &.money-input {
+        padding-left: 40px;
+      }
+    }
+
+    input[type="file"] {
+      padding-left: 20px;
+    }
+
+    .basic-select {
+      font-size: 14px !important;
+      border: 1px solid $border-color;
+      border-radius: 5px;
+
+      &.focus {
+        border: 1px solid $primary-color !important;
+      }
+    }
+
+    select {
+      padding: 13px;
+      border: 1px solid $border-color;
+      font-size: 14px;
+
+      &:disabled {
+        background: $white;
+      }
+    }
+  }
+
+  .upload-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 0;
+    border: 1px dashed $border-color;
+    background-color: rgba(248, 249, 252, 1);
+    margin-bottom: 30px;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bi-x-circle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      color: red;
+    }
+
+    .file-up {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      opacity: 0 !important;
+    }
+
+    p {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 0.5);
+    }
+
+    .upload-text {
+      font-size: 13px;
+      color: $light-color;
+      text-align: center;
+
+      .bi-upload {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .button-container {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+
+    .preview {
+      @include buttons(black);
+      background: $orange-color;
+    }
+
+    .publish {
+      @include buttons($black);
+    }
+  }
+}
+
+.all-blog {
+  padding: 40px 30px;
+  padding-top: 110px;
+
+  .heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $border-color;
+    margin-bottom: 40px;
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .right-dropdown {
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+      justify-content: space-between;
+
+      select {
+        width: 130px;
+        font-size: 13px;
+        margin: 0;
+      }
+    }
+
+    button {
+      @include buttons(black);
+      height: 40px;
+    }
+  }
+
+  table {
+    margin-bottom: 0;
+    width: 100% !important;
+
+    th {
+      @include body-text(14px, 600, $light-color);
+      padding: 21px 0.5rem;
+
+      &:first-child {
+        width: 4%;
+      }
+
+      &.actions {
+        width: 5%;
+      }
+    }
+
+    tr {
+      border-bottom: 1px solid $border-color;
+
+      &:hover {
+        background: #fdf6e3;
+      }
+
+      td {
+        @include body-text(14px, 400, $text-primary);
+        padding: 21px 0.5rem;
+
+        .status {
+          @include body-text(12px, 400, $text-color);
+          display: inline-block;
+          min-width: 90px;
+          padding: 5px;
+          border-radius: 4px;
+          text-align: center;
+          text-transform: capitalize;
+        }
+
+        button {
+          background-color: transparent;
+          color: rgba(222, 133, 0, 1);
+          margin-left: 0;
+        }
+
+        .order-action {
+          cursor: pointer;
+          height: 30px;
+          width: 30px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: $transitions;
+
+          &:hover {
+            background: rgba(225, 230, 239, 1);
+          }
+
+          .bi {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    // tbody {
+    //   tr {
+    //     &:last-child {
+    //       border-bottom: 1px solid transparent;
+    //     }
+    //   }
+    // }
+
+    tfoot {
+      margin-top: 10px;
+      background: $border-color !important;
+    }
+  }
+
+  .blog-empty {
+    margin-top: 50px;
+    color: $light-color;
+
+    .bi {
+      font-size: 50px;
+      color: $light-color;
+    }
+  }
+}
+
+.article {
+  background: $off-white;
+  height: 100vh;
+  width: 100%;
+  // margin-top:80px;
+  overflow-x: hidden;
+
+  .article-left {
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+
+    h1 {
+      @include heading(42px, 700);
+      line-height: 60px;
+      margin-bottom: 18px;
+    }
+
+    p {
+      @include body-text(18px, 400, $text-color);
+      text-transform: uppercase;
+    }
+
+    small {
+      @include body-text(14px, 400, $orange-color);
+      text-transform: uppercase;
+    }
+
+    span {
+      @include body-text(14px, 400, $orange-color);
+      text-transform: uppercase;
+    }
+
+    .hero-footer {
+      display: flex;
+      align-items: center;
+
+      @media (max-width: 425px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  }
+
+  .article-right {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 991px) {
+      display: none;
+    }
+
+    .article-right-img {
+      height: 400px;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.summary {
+  background: $off-white;
+  padding-bottom: 80px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  .summary-box {
+    background: $white;
+    padding: 80px 100px;
+
+    @media (max-width: 991px) {
+      padding: 80px 10px;
+    }
+
+    h2 {
+      @include heading(17px, 600);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    p {
+      @include body-text(18px, 400, $text-color);
+      line-height: 30px;
+      margin-bottom: 30px;
+    }
+  }
+}
