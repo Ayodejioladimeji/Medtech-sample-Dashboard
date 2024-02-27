@@ -16,16 +16,16 @@
 
   .card-content {
     height: 150px;
-    padding-left: 20px;
-    padding-top: 20px;
+    padding: 20px;
 
     h3 {
-      @include heading(24px, 500);
+      @include heading(20px, 500);
       margin-bottom: 10px;
+      line-height: 30px;
     }
 
     p {
-      @include body-text(16px, 600, $text-color);
+      @include body-text(15px, 600, $text-color);
       text-transform: uppercase;
     }
   }

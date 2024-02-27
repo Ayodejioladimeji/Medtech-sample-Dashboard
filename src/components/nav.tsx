@@ -1,12 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Logo2 from "@/svg/Logo2";
 import Image from "next/image";
 
 export default function Nav() {
   const router = useRouter();
-
   //
 
   return (
@@ -56,46 +54,6 @@ export default function Nav() {
                 </li>
                 <li>
                   <Link href="/blogs/all-blogs">All Blogs</Link>
-                </li>
-              </ul>
-            </li>
-
-            <li className="nav-item dropdown">
-              <Link
-                className={`nav-link dropdown-toggle ${
-                  router.asPath.includes("settings") &&
-                  !router.asPath.includes("individual")
-                    ? "active"
-                    : ""
-                }`}
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Settings
-              </Link>
-              <ul className="dropdown-menu">
-                <li>
-                  <Link className="dropdown-item" href="#">
-                    General Settings
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="dropdown-item"
-                    href="/settings/changepassword"
-                  >
-                    Permissions
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="dropdown-item"
-                    href="/settings/changepassword"
-                  >
-                    Documents
-                  </Link>
                 </li>
               </ul>
             </li>

@@ -28,7 +28,7 @@ const Card = (props: Props) => {
 
       <div className="card-content">
         <h3>{props?.title}</h3>
-        <p>{props?.category}</p>
+        {/* <p>{props?.category}</p> */}
       </div>
 
       <div className="card-footer">
