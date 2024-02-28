@@ -4,6 +4,7 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { DeleteRequest } from "@/utils/request";
 import cogoToast from "cogo-toast";
+import Loading from "./loading";
 
 type Props = {
   _id: string;
@@ -17,9 +18,11 @@ type Props = {
 const Card = (props: Props) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [id, setId] = useState("");
 
   // handle delete
-  const handleDelete = async () => {
+  const handleDelete = async (newId) => {
+    setId(newId);
     setLoading(true);
     const res = await DeleteRequest("/blog");
     if (res?.status === 200) {
@@ -61,8 +64,17 @@ const Card = (props: Props) => {
         >
           Edit
         </button>
-        <button onClick={handleDelete} className="delete">
-          Delete
+        <button onClick={() => handleDelete(props?._id)} className="delete">
+          {loading && id === props?._id ? (
+            <Loading
+              height="20px"
+              width="20px"
+              primaryColor="#fff"
+              secondaryColor="#fff"
+            />
+          ) : (
+            "Delete"
+          )}
         </button>
       </div>
     </div>
