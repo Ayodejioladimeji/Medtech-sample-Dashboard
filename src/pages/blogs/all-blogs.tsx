@@ -19,7 +19,7 @@ const AllBlogs = (props: Props) => {
   useEffect(() => {
     (async () => {
       const res = await GetRequest("/all-blog");
-      if (res.status === 200) {
+      if (res?.status === 200) {
         setBlogs(res.data);
         setLoading(false);
       } else {
