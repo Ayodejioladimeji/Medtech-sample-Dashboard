@@ -1,10 +1,12 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import moment from "moment";
 import { useRouter } from "next/router";
-import { DeleteRequest } from "@/utils/request";
+import { DeleteRequest, PostRequest } from "@/utils/request";
 import cogoToast from "cogo-toast";
 import Loading from "./loading";
+import { DataContext } from "@/store/GlobalState";
+import { ACTIONS } from "@/store/Actions";
 
 type Props = {
   _id: string;
@@ -19,13 +21,26 @@ const Card = (props: Props) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState("");
+  const { state, dispatch } = useContext(DataContext);
 
   // handle delete
   const handleDelete = async (newId) => {
     setId(newId);
     setLoading(true);
-    const res = await DeleteRequest("/blog");
+
+    const res = await DeleteRequest(`/delete-blog/${newId}`);
     if (res?.status === 200) {
+      // delete image from cloudinary
+      const payload = {
+        public_id: props?.image?.public_id,
+      };
+      await PostRequest("/delete-image", payload);
+
+      dispatch({
+        type: ACTIONS.DELETECALLBACK,
+        payload: !state?.deletecallback,
+      });
+
       cogoToast.success("Blog deleted successfully");
       setLoading(false);
     } else {

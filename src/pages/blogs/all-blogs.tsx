@@ -14,6 +14,7 @@ const AllBlogs = (props: Props) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const [categories, setCategories] = useState("");
+  const { state } = useContext(DataContext);
 
   useEffect(() => {
     (async () => {
@@ -26,7 +27,7 @@ const AllBlogs = (props: Props) => {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [state?.deletecallback]);
 
   //
   return (

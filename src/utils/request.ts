@@ -117,17 +117,13 @@ export const Getrequest = async (url: string, data?: any) => {
   }
 };
 
-export const DeleteRequest = async (url: string, token?: string) => {
+export const DeleteRequest = async (url: string) => {
   try {
-    const res = await axios.delete(
-      endpoint + url,
-      token && {
-        headers: {
-          Authorization: `${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await axios.delete(endpoint + url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     return res;
   } catch (error) {

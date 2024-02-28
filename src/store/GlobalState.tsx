@@ -5,9 +5,7 @@ export const DataContext = createContext(null);
 
 export const DataProvider = ({ children }: any) => {
   const initialState = {
-    user: null,
-    token: null,
-    pageloading: true,
+    deletecallback: false,
   };
 
   const [state, dispatch] = useReducer(reducers, initialState);

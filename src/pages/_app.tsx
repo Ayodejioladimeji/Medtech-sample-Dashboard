@@ -26,9 +26,9 @@ export default function App({ Component, pageProps }: AppProps) {
         crossOrigin="anonymous"
       ></Script>
 
-      {/* <DataProvider> */}
-      <Component {...pageProps} />
-      {/* </DataProvider> */}
+      <DataProvider>
+        <Component {...pageProps} />
+      </DataProvider>
     </>
   );
 }
