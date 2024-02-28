@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import Card from "@/common/card";
 import Loading from "@/common/loading";
 
-interface Props { }
+interface Props {}
 
 const AllBlogs = (props: Props) => {
   const [blogs, setBlogs] = useState(null);
@@ -18,6 +18,7 @@ const AllBlogs = (props: Props) => {
   useEffect(() => {
     (async () => {
       const res = await GetRequest("/all-blog");
+
       if (res?.status === 200) {
         setBlogs(res.data);
         setLoading(false);
@@ -99,7 +100,10 @@ const AllBlogs = (props: Props) => {
               <div className="row">
                 {blogs?.map((item: any, index: number) => {
                   return (
-                    <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" key={index}>
+                    <div
+                      className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                      key={index}
+                    >
                       <Card {...item} />
                     </div>
                   );

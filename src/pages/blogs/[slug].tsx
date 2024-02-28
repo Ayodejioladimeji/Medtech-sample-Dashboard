@@ -18,7 +18,7 @@ import Loading from "@/common/loading";
 import CameraIcon from "@/svg/CameraIcon";
 import Image from "next/image";
 
-interface Props { }
+interface Props {}
 
 const initialValues = {
   category: "",
@@ -80,7 +80,6 @@ const EditBlogs = (props: Props) => {
     // upload image
     const res = await UploadRequest("/upload-image", formData);
     setSelectedFile(res.data);
-    console.log(res.data)
     setUploading(false);
   };
 
@@ -125,12 +124,7 @@ const EditBlogs = (props: Props) => {
       public_id: selectedFile?.public_id,
     };
 
-
-
-    const res = await PostRequest(
-      "/delete-image",
-      payload
-    );
+    const res = await PostRequest("/delete-image", payload);
     setSelectedFile(null);
   };
 
@@ -166,7 +160,7 @@ const EditBlogs = (props: Props) => {
                       <Image
                         height={100}
                         width={100}
-                        src={selectedFile}
+                        src={selectedFile?.url}
                         className="img-fluid"
                         alt="image"
                         unoptimized

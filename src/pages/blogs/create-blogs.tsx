@@ -12,7 +12,7 @@ import Image from "next/image";
 import Loading from "@/common/loading";
 import CameraIcon from "@/svg/CameraIcon";
 
-interface Props { }
+interface Props {}
 
 const initialValues = {
   image: "",
@@ -82,7 +82,6 @@ const CreateBlogs = (props: Props) => {
 
     const result = await PostRequest("/blog", payload);
     if (result.status === 200 || result.status === 201) {
-      console.log(result);
       cogoToast.success(result.data.msg);
       router.push("/blogs/all-blogs");
       setLoading(false);
@@ -109,7 +108,6 @@ const CreateBlogs = (props: Props) => {
     <Layout>
       <div className="create-blog">
         <div className="container">
-
           <h1>Write Article</h1>
 
           <form onSubmit={handleSubmit}>
@@ -135,7 +133,10 @@ const CreateBlogs = (props: Props) => {
                             alt="image"
                             unoptimized
                           />
-                          <i className="bi bi-x-circle" onClick={deleteImage}></i>
+                          <i
+                            className="bi bi-x-circle"
+                            onClick={deleteImage}
+                          ></i>
                         </>
                       ) : (
                         <>

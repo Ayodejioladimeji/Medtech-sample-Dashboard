@@ -67,7 +67,7 @@ const BlogDetails = () => {
                 <div className="col-lg-6 article-right">
                   <div className="article-right-img">
                     <Image
-                      src={blog?.image}
+                      src={blog?.image?.url}
                       alt="hero"
                       width={100}
                       height={100}
