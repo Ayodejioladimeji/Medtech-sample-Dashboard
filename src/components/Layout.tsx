@@ -9,23 +9,6 @@ interface Props {
 }
 
 const Layout = (props: Props) => {
-  const router = useRouter();
-  const { state, dispatch } = useContext(DataContext);
-  //   const [pageloading, setPageloading] = useState(true);
-
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("user"));
-    if (!userData) {
-      router.push("/");
-      return;
-    }
-
-    dispatch({ type: ACTIONS.PAGELOADING, payload: false });
-    dispatch({ type: ACTIONS.TOKEN, payload: userData?.token });
-    dispatch({ type: ACTIONS.USER, payload: userData?.user });
-  }, [router, dispatch]);
-
-  if (state.pageloading) return;
 
   //
   return (

@@ -12,7 +12,7 @@ import Image from "next/image";
 import Loading from "@/common/loading";
 import CameraIcon from "@/svg/CameraIcon";
 
-interface Props {}
+interface Props { }
 
 const initialValues = {
   image: "",
@@ -25,7 +25,7 @@ const CreateBlogs = (props: Props) => {
   const [values, setValues] = useState(initialValues);
   const [selectedFile, setSelectedFile] = useState(null);
   const [initialContent, setInitialContent] = useState(null);
-  const { state } = useContext(DataContext);
+  // const { state } = useContext(DataContext);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
@@ -80,7 +80,7 @@ const CreateBlogs = (props: Props) => {
       content: btoa(editorRef.current.getContent()),
     };
 
-    const result = await PostRequest("/blog", payload, state?.token);
+    const result = await PostRequest("/blog", payload);
     if (result.status === 200 || result.status === 201) {
       console.log(result);
       cogoToast.success(result.data.msg);
@@ -107,96 +107,105 @@ const CreateBlogs = (props: Props) => {
   //
   return (
     <Layout>
-      <div className="container create-blog">
-        <h1>Write Article</h1>
+      <div className="create-blog">
+        <div className="container">
 
-        <form onSubmit={handleSubmit}>
-          <div className="upload-box">
-            {uploading ? (
-              <Loading
-                height="30px"
-                width="30px"
-                primaryColor="#888"
-                secondaryColor="#888"
+          <h1>Write Article</h1>
+
+          <form onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col">
+                <div className="upload-box">
+                  {uploading ? (
+                    <Loading
+                      height="30px"
+                      width="30px"
+                      primaryColor="#888"
+                      secondaryColor="#888"
+                    />
+                  ) : (
+                    <>
+                      {selectedFile !== null ? (
+                        <>
+                          <Image
+                            height={100}
+                            width={100}
+                            src={selectedFile?.url}
+                            className="img-fluid"
+                            alt="image"
+                            unoptimized
+                          />
+                          <i className="bi bi-x-circle" onClick={deleteImage}></i>
+                        </>
+                      ) : (
+                        <>
+                          <input
+                            autoComplete="off"
+                            type="file"
+                            accept="image/*"
+                            id="Image"
+                            className="file-up"
+                            onChange={handleFile}
+                          />
+                          <div className="upload-text">
+                            <CameraIcon /> <br />
+                            <i className="bi bi-upload"></i>Click to upload
+                          </div>
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="row mb-4">
+              <div className="col-12 col-md-3">
+                <div className="form-box">
+                  <label htmlFor="category">Category</label>
+                  <select
+                    value={values.category}
+                    name="category"
+                    onChange={handleChange}
+                    className="form-select"
+                  >
+                    <option defaultValue="">----</option>
+                    <option value="business">Business</option>
+                    <option value="general">General</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="col-12 col-md-9">
+                <div className="form-box">
+                  <label htmlFor="asset">Title</label>
+                  <input
+                    type="text"
+                    id="asset"
+                    value={values.title}
+                    name="title"
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col form-box">
+                <Editors editorRef={editorRef} initialValue={initialContent} />
+              </div>
+            </div>
+
+            <div className="button-container">
+              <Button
+                title="Create Article"
+                handlesubmit={handleSubmit}
+                loading={loading}
+                width="150px"
               />
-            ) : (
-              <>
-                {selectedFile !== null ? (
-                  <>
-                    <Image
-                      height={100}
-                      width={100}
-                      src={selectedFile?.url}
-                      className="img-fluid"
-                      alt="image"
-                      unoptimized
-                    />
-                    <i className="bi bi-x-circle" onClick={deleteImage}></i>
-                  </>
-                ) : (
-                  <>
-                    <input
-                      autoComplete="off"
-                      type="file"
-                      accept="image/*"
-                      id="Image"
-                      className="file-up"
-                      onChange={handleFile}
-                    />
-                    <div className="upload-text">
-                      <CameraIcon /> <br />
-                      <i className="bi bi-upload"></i>Click to upload
-                    </div>
-                  </>
-                )}
-              </>
-            )}
-          </div>
-
-          <div className="row mb-4">
-            <div className="col-2">
-              <div className="form-box">
-                <label htmlFor="category">Category</label>
-                <select
-                  value={values.category}
-                  name="category"
-                  onChange={handleChange}
-                  className="form-select"
-                >
-                  <option defaultValue="">----</option>
-                  <option value="business">Business</option>
-                  <option value="general">General</option>
-                </select>
-              </div>
             </div>
-
-            <div className="col-7">
-              <div className="form-box">
-                <label htmlFor="asset">Title</label>
-                <input
-                  type="text"
-                  id="asset"
-                  value={values.title}
-                  name="title"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="form-box">
-            <Editors editorRef={editorRef} initialValue={initialContent} />
-          </div>
-
-          <div className="button-container">
-            <Button
-              title="Create Article"
-              handlesubmit={handleSubmit}
-              loading={loading}
-              width="150px"
-            />
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </Layout>
   );

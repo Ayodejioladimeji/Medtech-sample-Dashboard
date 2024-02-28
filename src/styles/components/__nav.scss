@@ -5,8 +5,17 @@ nav {
   position: fixed !important;
   z-index: 9;
 
+  @media (max-width:500px) {
+    padding: 20px 0px !important;
+  }
+
   .navbar-brand {
     margin-right: 80px;
+
+    @media (max-width:500px) {
+      margin-right: 0;
+    }
+
     svg {
       height: 20px;
       width: auto;
@@ -37,12 +46,15 @@ nav {
 
       li {
         padding: 8px 16px;
+
         &:hover {
           background-color: rgba(255, 249, 230, 1);
+
           a {
             color: $black !important;
           }
         }
+
         a {
           padding: 0 !important;
           background-color: transparent !important;
@@ -67,12 +79,15 @@ nav {
 
     li {
       padding: 8px 16px;
+
       &:hover {
         background-color: rgba(255, 249, 230, 1);
+
         a {
           color: $black !important;
         }
       }
+
       a,
       p {
         padding: 0 !important;
@@ -80,6 +95,7 @@ nav {
         color: $black !important;
         margin-right: 0 !important;
       }
+
       p {
         margin-bottom: 0;
         cursor: pointer;

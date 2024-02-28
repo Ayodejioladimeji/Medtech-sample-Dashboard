@@ -7,10 +7,9 @@ import { useRouter } from "next/router";
 import Card from "@/common/card";
 import Loading from "@/common/loading";
 
-interface Props {}
+interface Props { }
 
 const AllBlogs = (props: Props) => {
-  const { state } = useContext(DataContext);
   const [blogs, setBlogs] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -32,11 +31,11 @@ const AllBlogs = (props: Props) => {
   return (
     <Layout>
       <div className="all-blog">
-        <div className="heading">
+        <div className="heading my-4">
           <div>
             <h1>All Blogs</h1>
 
-            <div className="dropdown">
+            {/* <div className="dropdown">
               <select
                 // value={categories}
                 // onChange={(e) => setCategories(e.target.value)}
@@ -47,7 +46,7 @@ const AllBlogs = (props: Props) => {
                 <option value="2">General</option>
                 <option value="3">News</option>
               </select>
-            </div>
+            </div> */}
           </div>
 
           <button onClick={() => router.push("/blogs/create-blogs")}>
@@ -100,7 +99,7 @@ const AllBlogs = (props: Props) => {
               <div className="row">
                 {blogs?.map((item: any, index: number) => {
                   return (
-                    <div className="col-3" key={index}>
+                    <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" key={index}>
                       <Card {...item} />
                     </div>
                   );
