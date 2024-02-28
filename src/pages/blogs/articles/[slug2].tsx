@@ -13,7 +13,6 @@ const BlogDetails = () => {
   const router = useRouter();
   const [blog, setBlog] = useState(null);
   const { slug2 } = router.query;
-  const { state } = useContext(DataContext);
   const [loading, setLoading] = useState(true);
 
   //   get single blog
@@ -21,7 +20,6 @@ const BlogDetails = () => {
     if (slug2) {
       (async () => {
         const res = await GetRequest(`/blog/${slug2}`);
-        console.log(res.data);
         setBlog(res.data);
         setLoading(false);
       })();

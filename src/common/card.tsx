@@ -18,19 +18,20 @@ const Card = (props: Props) => {
   return (
     <div
       className="card"
-      onClick={() => router.push(`/blogs/articles/${props._id}`)}
+
     >
-      <div className="card-image">
+      <div className="card-image" onClick={() => router.push(`/blogs/articles/${props._id}`)}>
         <Image src={props?.image} alt="" width={100} height={100} unoptimized />
       </div>
 
-      <div className="card-content">
+      <div className="card-content" onClick={() => router.push(`/blogs/articles/${props._id}`)}>
         <h3>{props?.title}</h3>
-        {/* <p>{props?.category}</p> */}
+        <p>Updated at {moment(props?.createdAt).format("ll")}</p>
       </div>
 
       <div className="card-footer">
-        Updated at {moment(props?.createdAt).format("ll")}
+        <button className="edit" onClick={() => router.push(`/blogs/${props?._id}`)}>Edit</button>
+        <button className="delete">Delete</button>
       </div>
     </div>
   );

@@ -34,13 +34,31 @@
     }
 
     p {
-      @include body-text(15px, 600, $text-color);
-      text-transform: uppercase;
+      @include body-text(14px, 400, $light-color);
     }
   }
 
   .card-footer {
-    height: 50px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .edit {
+      @include buttons(black);
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .delete {
+      @include buttons(red);
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: red;
+      color: $white;
+    }
   }
 }

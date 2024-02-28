@@ -18,7 +18,7 @@ import Loading from "@/common/loading";
 import CameraIcon from "@/svg/CameraIcon";
 import Image from "next/image";
 
-interface Props {}
+interface Props { }
 
 const initialValues = {
   category: "",
@@ -30,7 +30,6 @@ const EditBlogs = (props: Props) => {
   const [values, setValues] = useState(initialValues);
   const [selectedFile, setSelectedFile] = useState(null);
   const [initialContent, setInitialContent] = useState(null);
-  const { state } = useContext(DataContext);
   const [loading, setLoading] = useState(true);
   const [buttonloading, setButtonloading] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -40,24 +39,22 @@ const EditBlogs = (props: Props) => {
 
   //   get single blog
   useEffect(() => {
-    if (state?.token && slug) {
+    if (slug) {
       (async () => {
-        const res = await GetRequest(`/admin/blog/${slug}`, state?.token);
+        const res = await GetRequest(`/blog/${slug}`);
 
         const newData = {
           category: res?.data?.category,
           title: res?.data?.title,
         };
 
-        console.log(res.data);
         setValues(newData);
         setSelectedFile(res.data.image ? res.data.image : null);
-        // setInitialContent(res.data.content);
         setInitialContent(res.data.content ? atob(res.data.content) : "");
         setLoading(false);
       })();
     }
-  }, [state?.token, slug]);
+  }, [slug]);
 
   // handle change
   const handleChange = (e) => {
@@ -81,8 +78,9 @@ const EditBlogs = (props: Props) => {
     formData.append("files", file);
 
     // upload image
-    const res = await UploadRequest("/admin/upload", formData);
+    const res = await UploadRequest("/upload-image", formData);
     setSelectedFile(res.data);
+    console.log(res.data)
     setUploading(false);
   };
 
@@ -109,7 +107,7 @@ const EditBlogs = (props: Props) => {
       content: btoa(editorRef.current.getContent()),
     };
 
-    const result = await PatchRequest("/admin/blog", payload, state?.token);
+    const result = await PatchRequest("/blog", payload);
     if (result.status === 200 || result.status === 201) {
       cogoToast.success(result.data.msg);
       router.push("/blogs/all-blogs");
@@ -127,10 +125,11 @@ const EditBlogs = (props: Props) => {
       public_id: selectedFile?.public_id,
     };
 
+
+
     const res = await PostRequest(
-      "/admin/delete-upload",
-      payload,
-      state?.token
+      "/delete-image",
+      payload
     );
     setSelectedFile(null);
   };
@@ -167,7 +166,7 @@ const EditBlogs = (props: Props) => {
                       <Image
                         height={100}
                         width={100}
-                        src={selectedFile?.url}
+                        src={selectedFile}
                         className="img-fluid"
                         alt="image"
                         unoptimized
